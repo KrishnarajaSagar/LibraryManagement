@@ -18,5 +18,15 @@ namespace LibraryManagement.Repositories
         {
             return _context.Readers.OrderBy(r => r.Id).ToList();
         }
+
+        public Reader GetReader(int id)
+        {
+            return _context.Readers.Where(r => r.Id == id).FirstOrDefault();
+        }
+
+        public bool ReaderExists(int readerId)
+        {
+            return _context.Readers.Any(r => r.Id == readerId);
+        }
     }
 }

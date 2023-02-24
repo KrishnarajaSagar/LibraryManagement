@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "nuXdcY9AVv7e2ddqwS3VpUWFafD61+edOJBmwuIAzxbiMhZ7/ud5RyDB4uHE3Sg6WhR35eTsQfxpXMweF/mOjA==",
+  "dgSpecHash": "A298OTo86LsOzu238DKQOerhLA37HVjAvvnXLkrQA1C1ktl5rwdfkXrFFjeB0XWilsFrER4HBrXbVGBn3btL2A==",
   "success": true,
   "projectFilePath": "C:\\Users\\krits1\\source\\repos\\LibraryManagement\\LibraryManagement\\LibraryManagement.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\krits1\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\krits1\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\krits1\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\krits1\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\krits1\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",

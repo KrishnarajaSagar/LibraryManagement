@@ -1,6 +1,9 @@
-﻿using LibraryManagement.Interfaces;
+﻿using AutoMapper;
+using LibraryManagement.Dto;
+using LibraryManagement.Interfaces;
 using LibraryManagement.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace LibraryManagement.Controllers
 {
@@ -9,16 +12,19 @@ namespace LibraryManagement.Controllers
     public class ReaderController : Controller
     {
         private readonly IReaderRepository _readerRepository;
-        public ReaderController(IReaderRepository readerRepository)
+        private readonly IMapper _mapper;
+
+        public ReaderController(IReaderRepository readerRepository, IMapper mapper)
         {
             _readerRepository = readerRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Reader>))]
         public IActionResult GetReaders()
         {
-            var readers = _readerRepository.GetReaders();
+            var readers = _mapper.Map<List<ReaderDto>>(_readerRepository.GetReaders());
 
             if(!ModelState.IsValid)
             {
@@ -26,6 +32,22 @@ namespace LibraryManagement.Controllers
             }
 
             return Ok(readers);
+        }
+
+        [HttpGet("{readerId}")]
+        [ProducesResponseType(200, Type = typeof(Reader))]
+        [ProducesResponseType(400)]
+        public IActionResult GetReader(int readerId)
+        {
+            if (!_readerRepository.ReaderExists(readerId))
+                return NotFound();
+
+            var reader = _mapper.Map<ReaderDto>(_readerRepository.GetReader(readerId));
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(reader);
         }
     }
 }
