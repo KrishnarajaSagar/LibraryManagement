@@ -21,7 +21,8 @@ namespace LibraryManagement.Repositories
         {
             return _context.BookCategories.Where(
                 e => e.CategoryId == categoryId)
-                .Select(b => b.Book).ToList();
+                .Select(b => b.Book)
+                .ToList();
         }
 
         public ICollection<Category> GetCategories()
@@ -32,7 +33,8 @@ namespace LibraryManagement.Repositories
         public Category GetCategory(int id)
         {
             return _context.Categories.Where(
-                c => c.Id == id).FirstOrDefault();
+                c => c.Id == id)
+                .FirstOrDefault();
         }
     }
 }

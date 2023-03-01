@@ -11,6 +11,8 @@ namespace LibraryManagement.Helper
             CreateMap<Reader, ReaderDto>();
             CreateMap<Category, CategoryDto>();
             CreateMap<Book, BookDto>();
+            CreateMap<Review, ReviewDto>();
+            CreateMap<Reviewer,ReviewerDto>();
         }
     }
 }
