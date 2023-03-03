@@ -2,6 +2,7 @@
 using LibraryManagement.Dto;
 using LibraryManagement.Interfaces;
 using LibraryManagement.Models;
+using LibraryManagement.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -80,6 +81,35 @@ namespace LibraryManagement.Controllers
             }
 
             return Ok("Successfully created");
+        }
+
+        [HttpPut("{readerId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(204)]
+        public IActionResult UpdateReader(int readerId, [FromBody] ReaderDto updatedReader)
+        {
+            if (updatedReader == null)
+                return BadRequest(ModelState);
+
+            if (readerId != updatedReader.Id)
+                return BadRequest(ModelState);
+
+            if (!_readerRepository.ReaderExists(readerId))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var readerMap = _mapper.Map<Reader>(updatedReader);
+
+            if (!_readerRepository.UpdateReader(readerMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while updating");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully updated");
         }
     }
 }

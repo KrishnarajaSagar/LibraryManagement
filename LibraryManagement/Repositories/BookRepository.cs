@@ -17,8 +17,19 @@ namespace LibraryManagement.Repositories
             return _context.Books.Any(b => b.Id == id);
         }
 
-        public bool CreateBook(Book book)
+        public bool CreateBook(int categoryId, Book book)
         {
+            var category = _context.Categories
+                .Where(c => c.Id == categoryId)
+                .FirstOrDefault();
+
+            var bookCategory = new BookCategory()
+            {
+                Category = category,
+                Book = book
+            };
+
+            _context.Add(bookCategory);
             _context.Add(book);
 
             return Save();
@@ -55,6 +66,31 @@ namespace LibraryManagement.Repositories
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
+        }
+
+        public bool UpdateBook(int categoryId, Book book)
+        {
+            var bookCategoryEntity = _context.BookCategories
+                .Where(bc => bc.BookId == book.Id)
+                .FirstOrDefault();
+
+            var categoryEntity = _context.Categories
+                .Where(c => c.Id == categoryId)
+                .FirstOrDefault();
+
+            if (bookCategoryEntity != null && categoryEntity != null)
+            {
+                _context.Remove(bookCategoryEntity);
+                var bookCategory = new BookCategory()
+                {
+                    Book = book,
+                    Category = categoryEntity
+                };
+                _context.Add(bookCategory);
+            }
+            
+            _context.Update(book);
+            return Save();
         }
     }
 }

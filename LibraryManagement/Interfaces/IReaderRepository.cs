@@ -9,5 +9,6 @@ namespace LibraryManagement.Interfaces
         bool ReaderExists(int readerId);
         bool CreateReader(Reader reader);
         bool Save();
+        bool UpdateReader(Reader reader);
     }
 }

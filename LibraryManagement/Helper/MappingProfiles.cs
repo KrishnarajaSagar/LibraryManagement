@@ -11,10 +11,13 @@ namespace LibraryManagement.Helper
             CreateMap<Reader, ReaderDto>();
             CreateMap<ReaderDto, Reader>();
             CreateMap<Category, CategoryDto>();
+            CreateMap<CategoryDto, Category>();
             CreateMap<Book, BookDto>();
             CreateMap<BookDto, Book>();
             CreateMap<Review, ReviewDto>();
-            CreateMap<Reviewer,ReviewerDto>();
+            CreateMap<ReviewDto, Review>();
+            CreateMap<Reviewer, ReviewerDto>();
+            CreateMap<ReviewerDto, Reviewer>();
         }
     }
 }

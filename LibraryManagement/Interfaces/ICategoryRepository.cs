@@ -8,5 +8,8 @@ namespace LibraryManagement.Interfaces
         Category GetCategory(int id);
         ICollection<Book> GetBooksByCategory(int categoryId);
         bool CategoryExists(int id);
+        bool CreateCategory(Category category);
+        bool Save();
+        bool UpdateCategory(Category category);
     }
 }

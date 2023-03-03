@@ -8,5 +8,8 @@ namespace LibraryManagement.Interfaces
         Reviewer GetReviewer(int id);
         ICollection<Review> GetReviewsByReviewerId(int reviewerId);
         bool ReviewerExists(int id);
+        bool CreateReviewer(Reviewer reviewer);
+        bool Save();
+        bool UpdateReviewer(Reviewer reviewer);
     }
 }

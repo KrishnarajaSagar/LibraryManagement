@@ -41,5 +41,11 @@ namespace LibraryManagement.Repositories
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+        public bool UpdateReader(Reader reader)
+        {
+            _context.Update(reader);
+            return Save();
+        }
     }
 }
