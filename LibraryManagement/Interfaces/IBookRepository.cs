@@ -9,5 +9,7 @@ namespace LibraryManagement.Interfaces
         Reader GetReaderByBookId(int bookId);
         ICollection<Review> GetReviewsByBookId(int bookId);
         bool BookExists(int id);
+        bool CreateBook(Book book);
+        bool Save();
     }
 }

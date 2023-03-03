@@ -17,6 +17,13 @@ namespace LibraryManagement.Repositories
             return _context.Books.Any(b => b.Id == id);
         }
 
+        public bool CreateBook(Book book)
+        {
+            _context.Add(book);
+
+            return Save();
+        }
+
         public Book GetBook(int id)
         {
             return _context.Books.Where(
@@ -42,6 +49,12 @@ namespace LibraryManagement.Repositories
                 b => b.Id == bookId)
                 .Select(b => b.Reviews).ToList()
                 .First();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

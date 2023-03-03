@@ -1,4 +1,6 @@
-﻿namespace LibraryManagement.Dto
+﻿using LibraryManagement.Models;
+
+namespace LibraryManagement.Dto
 {
     public class ReviewerDto
     {

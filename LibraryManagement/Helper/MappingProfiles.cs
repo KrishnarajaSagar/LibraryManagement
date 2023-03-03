@@ -9,8 +9,10 @@ namespace LibraryManagement.Helper
         public MappingProfiles()
         {
             CreateMap<Reader, ReaderDto>();
+            CreateMap<ReaderDto, Reader>();
             CreateMap<Category, CategoryDto>();
             CreateMap<Book, BookDto>();
+            CreateMap<BookDto, Book>();
             CreateMap<Review, ReviewDto>();
             CreateMap<Reviewer,ReviewerDto>();
         }

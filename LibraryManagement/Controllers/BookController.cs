@@ -11,11 +11,13 @@ namespace LibraryManagement.Controllers
     public class BookController : Controller
     {
         private readonly IBookRepository _bookRepository;
+        private readonly IReaderRepository _readerRepository;
         private readonly IMapper _mapper;
 
-        public BookController(IBookRepository bookRepository, IMapper mapper)
+        public BookController(IBookRepository bookRepository,IReaderRepository readerRepository, IMapper mapper)
         {
             _bookRepository = bookRepository;
+            _readerRepository = readerRepository;
             _mapper = mapper;
         }
 
@@ -77,6 +79,39 @@ namespace LibraryManagement.Controllers
                 return BadRequest(ModelState);
 
             return Ok(reviews);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateBook([FromQuery] int readerId, [FromBody] BookDto bookCreate)
+        {
+            if (bookCreate == null)
+                return BadRequest(ModelState);
+
+            var book = _bookRepository.GetBooks()
+                .Where(b => b.Name.Trim().ToUpper() == bookCreate.Name.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+            if(book != null)
+            {
+                ModelState.AddModelError("", "Book already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var bookMap = _mapper.Map<Book>(bookCreate);
+            bookMap.Reader = _readerRepository.GetReader(readerId);
+
+            if(!_bookRepository.CreateBook(bookMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created");
         }
     }
 }

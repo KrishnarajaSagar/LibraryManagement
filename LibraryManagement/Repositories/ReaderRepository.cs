@@ -28,5 +28,18 @@ namespace LibraryManagement.Repositories
         {
             return _context.Readers.Any(r => r.Id == readerId);
         }
+
+        public bool CreateReader(Reader reader)
+        {
+            _context.Add(reader);
+
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }

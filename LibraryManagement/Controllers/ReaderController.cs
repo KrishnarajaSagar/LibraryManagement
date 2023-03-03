@@ -49,5 +49,37 @@ namespace LibraryManagement.Controllers
 
             return Ok(reader);
         }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateReader([FromBody] ReaderDto readerCreate)
+        {
+            if (readerCreate == null)
+                return BadRequest(ModelState);
+
+            var reader = _readerRepository.GetReaders()
+                .Where(r => r.Name.Trim().ToUpper() == readerCreate.Name.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+            if(reader != null)
+            {
+                ModelState.AddModelError("", "Reader already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var readerMap = _mapper.Map<Reader>(readerCreate);
+
+            if(!_readerRepository.CreateReader(readerMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created");
+        }
     }
 }

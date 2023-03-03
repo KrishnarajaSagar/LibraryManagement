@@ -7,5 +7,7 @@ namespace LibraryManagement.Interfaces
         public ICollection<Reader> GetReaders();
         Reader GetReader(int id);
         bool ReaderExists(int readerId);
+        bool CreateReader(Reader reader);
+        bool Save();
     }
 }
