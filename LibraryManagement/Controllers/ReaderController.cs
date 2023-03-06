@@ -111,5 +111,25 @@ namespace LibraryManagement.Controllers
 
             return Ok("Successfully updated");
         }
+
+        [HttpDelete("{readerId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteReader(int readerId)
+        {
+            if (!_readerRepository.ReaderExists(readerId))
+                return NotFound();
+
+            var readerToDelete = _readerRepository.GetReader(readerId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_readerRepository.DeleteReader(readerToDelete))
+                ModelState.AddModelError("", "Something went wrong while deleting");
+
+            return Ok("Successfully deleted");
+        }
     }
 }

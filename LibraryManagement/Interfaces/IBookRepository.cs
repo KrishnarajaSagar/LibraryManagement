@@ -12,5 +12,6 @@ namespace LibraryManagement.Interfaces
         bool CreateBook(int categoryId, Book book);
         bool Save();
         bool UpdateBook(int categoryId, Book book);
+        bool DeleteBook(Book book);
     }
 }

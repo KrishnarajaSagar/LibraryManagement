@@ -10,5 +10,6 @@ namespace LibraryManagement.Interfaces
         bool CreateReader(Reader reader);
         bool Save();
         bool UpdateReader(Reader reader);
+        bool DeleteReader(Reader reader);
     }
 }

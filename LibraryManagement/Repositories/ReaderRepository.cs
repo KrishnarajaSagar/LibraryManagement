@@ -47,5 +47,11 @@ namespace LibraryManagement.Repositories
             _context.Update(reader);
             return Save();
         }
+
+        public bool DeleteReader(Reader reader)
+        {
+            _context.Remove(reader);
+            return Save();
+        }
     }
 }

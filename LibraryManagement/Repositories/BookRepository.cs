@@ -35,6 +35,12 @@ namespace LibraryManagement.Repositories
             return Save();
         }
 
+        public bool DeleteBook(Book book)
+        {
+            _context.Remove(book);
+            return Save();
+        }
+
         public Book GetBook(int id)
         {
             return _context.Books.Where(

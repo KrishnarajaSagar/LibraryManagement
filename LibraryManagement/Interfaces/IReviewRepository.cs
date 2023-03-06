@@ -12,5 +12,6 @@ namespace LibraryManagement.Interfaces
         bool CreateReview(Review review);
         bool Save();
         bool UpdateReview(Review review);
+        bool DeleteReview(Review review);
     }
 }

@@ -19,6 +19,12 @@ namespace LibraryManagement.Repositories
             return Save();
         }
 
+        public bool DeleteReview(Review review)
+        {
+            _context.Remove(review);
+            return Save();
+        }
+
         public Book GetBookByReviewId(int reviewId)
         {
             return _context.Reviews.Where(

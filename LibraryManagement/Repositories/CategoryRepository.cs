@@ -24,6 +24,12 @@ namespace LibraryManagement.Repositories
             return Save();
         }
 
+        public bool DeleteCategory(Category category)
+        {
+            _context.Remove(category);
+            return Save();
+        }
+
         public ICollection<Book> GetBooksByCategory(int categoryId)
         {
             return _context.BookCategories.Where(
